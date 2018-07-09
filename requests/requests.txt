@@ -1,0 +1,21 @@
+POOL 1 :
+
+XI. Le héros ayant dirigé le plus d’expéditions :
+	SELECT Nom, Prenom FROM heros WHERE ID =( SELECT ID_Heros FROM expedition GROUP BY ID_Heros ORDER BY COUNT(*) DESC LIMIT 1)
+
+VII. L’expédition ou les expéditions les plus longues :
+	SELECT Numero "Expédition la plus longue" FROM expedition WHERE ID =( SELECT ID_Expedition FROM etape GROUP BY ID_Expedition ORDER BY COUNT(*) DESC LIMIT 1)
+
+
+POOL 2 :
+
+XIX. Le bateau ayant fait le plus d’escales :
+	SELECT Nom FROM navire WHERE ID =( SELECT ID_Navire FROM expedition WHERE ID =( SELECT ID_Expedition FROM etape GROUP BY ID_Expedition ORDER BY COUNT(*) DESC LIMIT 1 ))
+
+III. Le couple Dieu/bateau ayant fait le plus d’expéditions :
+	SELECT navire.Nom "Bateau", divinite.Nom "Divinité" FROM navire, divinite WHERE navire.ID =( SELECT ID_Navire FROM expedition GROUP BY ID_Navire, ID_Divinite ORDER BY COUNT(*) DESC LIMIT 1 ) AND divinite.ID =( SELECT ID_Divinite FROM expedition GROUP BY ID_Navire, ID_Divinite ORDER BY COUNT(*) DESC LIMIT 1 )
+
+
+
+	
+	
